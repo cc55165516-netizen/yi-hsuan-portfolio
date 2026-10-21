@@ -4,15 +4,35 @@ async function loadJSON(path) {
   return response.json();
 }
 
+function setText(id, value) {
+  const element = document.getElementById(id);
+  if (element && typeof value === "string") element.textContent = value;
+}
+
+function renderEditorialTitle(value) {
+  const title = document.getElementById("hero-title");
+  if (!title || !value) return;
+  const words = value.trim().split(/\s+/);
+  if (words.length < 3) {
+    title.textContent = value;
+    return;
+  }
+  const ending = words.splice(-2).join(" ");
+  title.replaceChildren(
+    document.createTextNode(words.join(" ")),
+    document.createElement("br")
+  );
+  const emphasis = document.createElement("em");
+  emphasis.textContent = ending;
+  title.append(emphasis);
+}
+
 async function renderHome() {
+  if (!document.getElementById("hero-title")) return;
   try {
     const profile = await loadJSON("data/profile.json");
-    const setText = (id, value) => {
-      const el = document.getElementById(id);
-      if (el && value) el.textContent = value;
-    };
     setText("intro-kicker", profile.kicker);
-    setText("hero-title", profile.heroTitle);
+    renderEditorialTitle(profile.heroTitle);
     setText("hero-copy", profile.heroCopy);
     setText("name-en", profile.nameEnglish);
     setText("name-zh", profile.nameChinese);
@@ -21,8 +41,37 @@ async function renderHome() {
     setText("featured-title", profile.featuredTitle);
     setText("featured-summary", profile.featuredSummary);
   } catch (error) {
-    console.error(error);
+    console.error("Unable to load profile data:", error);
   }
+}
+
+function element(tag, className, value) {
+  const node = document.createElement(tag);
+  if (className) node.className = className;
+  if (value != null) node.textContent = String(value);
+  return node;
+}
+
+function projectCard(project, index) {
+  const article = element("article", "project-row");
+  article.id = project.id;
+  article.append(element("div", "project-index", String(index + 1).padStart(2, "0")));
+
+  const main = document.createElement("div");
+  main.append(element("p", "project-meta", `${project.type} · ${project.status}`));
+  const heading = element("h2", "", project.title);
+  if (project.chineseTitle) heading.append(element("span", "zh-title", project.chineseTitle));
+  main.append(heading, element("p", "project-summary", project.summary));
+
+  const detail = element("div", "project-detail");
+  detail.append(
+    element("h3", "", "Design question"),
+    element("p", "", project.question),
+    element("h3", "", "Focus"),
+    element("p", "", project.focus)
+  );
+  article.append(main, detail);
+  return article;
 }
 
 async function renderWorks() {
@@ -30,22 +79,16 @@ async function renderWorks() {
   if (!container) return;
   try {
     const projects = await loadJSON("data/projects.json");
-    container.innerHTML = projects.map((project, index) => `
-      <article class="project-row" id="${project.id}">
-        <div class="project-index">${String(index + 1).padStart(2, "0")}</div>
-        <div>
-          <p class="project-meta">${project.type} · ${project.status}</p>
-          <h2>${project.title}${project.chineseTitle ? `<span class="zh-title">${project.chineseTitle}</span>` : ""}</h2>
-          <p class="project-summary">${project.summary}</p>
-        </div>
-        <div class="project-detail">
-          <h3>Design question</h3><p>${project.question}</p>
-          <h3>Focus</h3><p>${project.focus}</p>
-        </div>
-      </article>`).join("");
+    if (!Array.isArray(projects)) throw new Error("Project data must be an array");
+    container.replaceChildren(...projects.map(projectCard));
+    if (location.hash) {
+      const target = document.getElementById(decodeURIComponent(location.hash.slice(1)));
+      if (target) target.scrollIntoView();
+    }
   } catch (error) {
-    container.innerHTML = '<p class="loading-note">Project content could not be loaded. Please check data/projects.json and run the site through a local server.</p>';
-    console.error(error);
+    container.replaceChildren(element("p", "loading-note",
+      "Project content could not be loaded. Check data/projects.json and refresh the page."));
+    console.error("Unable to load projects:", error);
   }
 }
 
