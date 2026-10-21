@@ -1,0 +1,42 @@
+[
+  {
+    "id": "city-stitching",
+    "type": "Graduation design",
+    "status": "In progress",
+    "title": "City Stitching",
+    "chineseTitle": "城市縫合術",
+    "summary": "A proposal for the Xinmin Market area in Taichung, exploring how a traditional market can reconnect with housing, work, and shared civic life in the old city.",
+    "question": "How can a market that is active mainly in the morning become part of a more continuous, everyday urban life?",
+    "focus": "Market activation, social housing, shared public space, and the overlap of daily routines."
+  },
+  {
+    "id": "dormitory",
+    "type": "Architectural design study",
+    "status": "Academic project",
+    "title": "Living in Layers",
+    "chineseTitle": "宿舍與共享空間研究",
+    "summary": "A study of student accommodation and the relationship between private rooms, collective facilities, and circulation across a multi-storey building.",
+    "question": "How can shared facilities support community while preserving residents’ privacy and a sense of personal territory?",
+    "focus": "Programme arrangement, vertical circulation, structural spans, and shared-space planning."
+  },
+  {
+    "id": "campus-plaza",
+    "type": "Spatial analysis",
+    "status": "Academic study",
+    "title": "Reading the Campus",
+    "chineseTitle": "校園廣場空間分析",
+    "summary": "An analysis of campus plazas through physical edges, functional zones, visual boundaries, and the ways people move through open space.",
+    "question": "How do spatial boundaries influence the identity and everyday use of a campus plaza?",
+    "focus": "Site observation, spatial hierarchy, movement, and visual connections."
+  },
+  {
+    "id": "little-prince",
+    "type": "Interior / experience concept",
+    "status": "Design study",
+    "title": "A Small Theatre for the Little Prince",
+    "chineseTitle": "小王子主題小劇場概念",
+    "summary": "A spatial concept study that uses the atmosphere and narrative associations of The Little Prince as a starting point for an intimate theatre experience.",
+    "question": "How can a literary atmosphere be translated into spatial sequence, scale, and audience experience?",
+    "focus": "Narrative, spatial sequence, audience proximity, and atmosphere."
+  }
+]
