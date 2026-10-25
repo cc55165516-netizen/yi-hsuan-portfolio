@@ -12,19 +12,14 @@ function setText(id, value) {
 function renderEditorialTitle(value) {
   const title = document.getElementById("hero-title");
   if (!title || !value) return;
-  const words = value.trim().split(/\s+/);
-  if (words.length < 3) {
+  const parts = value.split("|");
+  if (parts.length !== 2) {
     title.textContent = value;
     return;
   }
-  const ending = words.splice(-2).join(" ");
-  title.replaceChildren(
-    document.createTextNode(words.join(" ")),
-    document.createElement("br")
-  );
   const emphasis = document.createElement("em");
-  emphasis.textContent = ending;
-  title.append(emphasis);
+  emphasis.textContent = parts[1];
+  title.replaceChildren(document.createTextNode(parts[0]), document.createElement("br"), emphasis);
 }
 
 async function renderHome() {
@@ -65,9 +60,9 @@ function projectCard(project, index) {
 
   const detail = element("div", "project-detail");
   detail.append(
-    element("h3", "", "Design question"),
+    element("h3", "", "設計提問"),
     element("p", "", project.question),
-    element("h3", "", "Focus"),
+    element("h3", "", "設計重點"),
     element("p", "", project.focus)
   );
   article.append(main, detail);
@@ -87,7 +82,7 @@ async function renderWorks() {
     }
   } catch (error) {
     container.replaceChildren(element("p", "loading-note",
-      "Project content could not be loaded. Check data/projects.json and refresh the page."));
+      "作品資料載入失敗，請檢查 data/projects.json 並重新整理頁面。"));
     console.error("Unable to load projects:", error);
   }
 }
