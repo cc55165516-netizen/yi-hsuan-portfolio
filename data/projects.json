@@ -1,42 +1,136 @@
 [
   {
-    "id": "city-stitching",
-    "type": "畢業設計",
-    "status": "設計進行中",
-    "title": "城市縫合術",
-    "chineseTitle": "City Stitching",
-    "summary": "以台中東區新民市場及周邊街區為基地，重新思考傳統市場、社會住宅、辦公空間與公共生活的關係，讓不同時段的活動能在老城區延續。",
-    "question": "如何讓以早市為主的市場，在午後與夜間也能成為居民願意停留、交流的日常場所？",
-    "focus": "市場活化、社會住宅、共享動線、公共空間與生活機能整合。"
+    "id": "guling-theatre",
+    "type": "建築設計",
+    "status": "作品集收錄",
+    "title": "牯嶺街親子劇場設計",
+    "chineseTitle": "Family Theatre on Guling Street",
+    "summary": "以牯嶺街親子劇場為題，透過劇場、觀演與公共空間的配置，探索親子共同參與的文化場域。",
+    "question": "如何讓親子劇場兼顧表演體驗與日常公共活動？",
+    "focus": "概念發想、劇場空間、建築量體與空間模型。",
+    "role": "作品集未標示個別分工。",
+    "collaborators": "作品集未列出團隊成員。",
+    "sections": [
+      {
+        "title": "概念發想與設計呈現",
+        "description": "原作品集第 2 頁收錄建築外觀渲染、室內劇場氛圍、概念圖與空間模型。",
+        "pages": [
+          2
+        ]
+      }
+    ]
   },
   {
-    "id": "dormitory",
-    "type": "建築設計研究",
-    "status": "課程作品",
-    "title": "層次之間的居住",
-    "chineseTitle": "Living in Layers",
-    "summary": "以宿舍與共享空間為主題，研究私人房間、公共設施與垂直動線如何在多層建築中形成不同的生活層次。",
-    "question": "如何在保有個人隱私的同時，透過共享空間促進居住者之間的互動？",
-    "focus": "空間配置、垂直動線、結構跨距與共享空間規劃。"
+    "id": "collective-living",
+    "type": "集合住宅設計",
+    "status": "合作設計",
+    "title": "集體居住的想像",
+    "chineseTitle": "Imagining Collective Living",
+    "summary": "以集體居住為主題，從共享生活、空間交流及建築量體的角度，思考集合住宅的居住模式。",
+    "question": "如何透過空間組織，連結個人居住與集體生活？",
+    "focus": "設計概念、量體發展、基本圖面與建築渲染。",
+    "role": "隋宜軒：基本圖面及效果圖渲染。",
+    "collaborators": "黃芹玟：設計概念及 3D 模型。",
+    "sections": [
+      {
+        "title": "建築外觀與整體構想",
+        "description": "集合住宅整體效果圖。",
+        "pages": [
+          3
+        ]
+      },
+      {
+        "title": "設計概念",
+        "description": "以交流生活、社區生活、住宅生活及生態生活等面向構思居住環境。",
+        "pages": [
+          4
+        ]
+      },
+      {
+        "title": "量體發展",
+        "description": "呈現基地、量體生成、切割與機能配置等設計推演。",
+        "pages": [
+          5
+        ]
+      },
+      {
+        "title": "基本圖面",
+        "description": "包含配置、各層平面及立面剖面等圖面。",
+        "pages": [
+          6
+        ]
+      }
+    ]
   },
   {
-    "id": "campus-plaza",
-    "type": "空間分析",
-    "status": "課程研究",
-    "title": "閱讀校園",
-    "chineseTitle": "Reading the Campus",
-    "summary": "從實體邊界、使用分區、視覺關係與行走路徑切入，分析校園廣場的空間特性與使用方式。",
-    "question": "空間邊界如何影響校園廣場的識別性與日常活動？",
-    "focus": "基地觀察、空間層次、移動路徑與視覺連結。"
+    "id": "huaxia-campus",
+    "type": "校園規劃",
+    "status": "團隊合作",
+    "title": "邁向新校園－華夏校區校園規劃",
+    "chineseTitle": "Toward a New Campus — Huaxia Campus Planning",
+    "summary": "以華夏校區的整體空間為對象，透過基地配置與建築平面圖，呈現校園環境規劃方案。",
+    "question": "如何透過整體校園配置，重新組織建築與開放空間的關係？",
+    "focus": "校園配置、空間規劃、基本圖面與團隊協作。",
+    "role": "隋宜軒：基本圖面。",
+    "collaborators": "張謙聖：圖面美化；劉湘怡：簡報書製作；葉宜倫：展版製作；蔡伊瑄：報告書製作；李巧晶：模型製作。",
+    "sections": [
+      {
+        "title": "校園規劃與基本圖面",
+        "description": "原作品集第 7 頁收錄校園配置與相關平面圖。",
+        "pages": [
+          7
+        ]
+      }
+    ]
   },
   {
-    "id": "little-prince",
-    "type": "室內與體驗空間概念",
-    "status": "設計研究",
-    "title": "小王子主題小劇場",
-    "chineseTitle": "A Small Theatre for the Little Prince",
-    "summary": "以《小王子》的敘事氛圍為出發點，思考如何透過尺度、動線與場景轉換，營造親密的劇場體驗。",
-    "question": "如何將文學作品的情緒與敘事轉譯成空間序列和觀眾體驗？",
-    "focus": "敘事、空間序列、觀演距離與氛圍營造。"
+    "id": "huaxia-dorm",
+    "type": "學生宿舍設計",
+    "status": "合作設計",
+    "title": "邁向新校園－學生宿舍",
+    "chineseTitle": "Toward a New Campus — Student Dormitory",
+    "summary": "作為新校園規劃中的學生宿舍設計，透過量體發展、分層配置與立面表現，探索住宿空間與校園環境的關係。",
+    "question": "如何整合學生住宿、公共活動與建築量體，形塑新的校園生活場景？",
+    "focus": "宿舍設計、量體發展、分層說明、基本圖面及立面渲染。",
+    "role": "隋宜軒：基本圖面及效果圖渲染。",
+    "collaborators": "張謙聖：設計概念及 3D 模型。",
+    "sections": [
+      {
+        "title": "建築外觀",
+        "description": "學生宿舍整體外觀效果圖。",
+        "pages": [
+          8
+        ]
+      },
+      {
+        "title": "設計概念",
+        "description": "以模組與公共活動關係探索宿舍空間組成。",
+        "pages": [
+          9
+        ]
+      },
+      {
+        "title": "量體發展",
+        "description": "呈現建築量體與機能配置的推演過程。",
+        "pages": [
+          10
+        ]
+      },
+      {
+        "title": "分層說明",
+        "description": "呈現不同樓層與公共空間的安排。",
+        "pages": [
+          11
+        ]
+      },
+      {
+        "title": "基本圖面",
+        "description": "包含平面、剖面、立面與建築細部示意。",
+        "pages": [
+          12,
+          13
+        ]
+      }
+    ]
   }
 ]
