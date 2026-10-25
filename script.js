@@ -65,6 +65,31 @@ function projectCard(project, index) {
     element("h3", "", "設計重點"),
     element("p", "", project.focus)
   );
+  if (project.role) detail.append(element("h3", "", "我的負責項目"), element("p", "", project.role));
+  if (project.collaborators) detail.append(element("h3", "", "合作分工"), element("p", "", project.collaborators));
+  if (Array.isArray(project.sections)) {
+    const gallery = element("div", "project-gallery");
+    project.sections.forEach(section => {
+      const block = element("section", "gallery-section");
+      block.append(element("h3", "", section.title), element("p", "", section.description));
+      const pages = element("div", "gallery-pages");
+      (section.pages || []).forEach(page => {
+        const figure = element("figure", "portfolio-page");
+        const img = element("img", "portfolio-image");
+        img.src = `assets/portfolio/page-${String(page).padStart(2, "0")}.jpg`;
+        img.alt = `${project.title}－${section.title}，原作品集第 ${page} 頁`;
+        img.loading = "lazy";
+        img.addEventListener("error", () => {
+          figure.replaceChildren(element("p", "image-missing", `原作品集第 ${page} 頁圖面，待上傳圖片`));
+        }, {once:true});
+        figure.append(img, element("figcaption", "", `作品集 P.${page}`));
+        pages.append(figure);
+      });
+      block.append(pages);
+      gallery.append(block);
+    });
+    main.append(gallery);
+  }
   article.append(main, detail);
   return article;
 }
