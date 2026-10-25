@@ -72,3 +72,21 @@ nav a{transition:color .2s ease}
  .project-row h2{font-size:clamp(31px,8vw,44px)}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+
+
+/* Portfolio case studies, maintained through data/projects.json */
+.project-row{grid-template-columns:55px minmax(0,1fr) minmax(200px,.38fr);align-items:start;gap:clamp(16px,3vw,45px);padding:55px 0}
+.project-row h2{font-family:var(--sans);font-weight:500;letter-spacing:-.05em}
+.project-row h2 .zh-title{font-family:var(--serif);font-size:.45em;letter-spacing:0;font-weight:400;color:var(--muted)}
+.project-gallery{margin-top:36px;display:grid;gap:45px}
+.gallery-section{border-top:1px solid var(--line);padding-top:15px}
+.gallery-section>h3{font-size:15px;font-weight:600;margin:0 0 6px;letter-spacing:.06em}
+.gallery-section>p{font-size:13px;color:var(--muted);margin:0 0 18px;line-height:1.8}
+.gallery-pages{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:18px;align-items:start}
+.portfolio-page{margin:0}
+.portfolio-image{display:block;width:100%;height:auto;aspect-ratio:1;object-fit:contain;background:#fff;border:1px solid var(--line)}
+.portfolio-page figcaption{font-size:10px;letter-spacing:.1em;color:var(--muted);padding-top:9px}
+.image-missing{display:grid;place-items:center;min-height:210px;padding:25px;border:1px dashed var(--line);background:var(--soft);color:var(--muted);text-align:center;font-size:13px}
+.project-detail{position:sticky;top:30px}
+@media(max-width:950px){.project-row{grid-template-columns:40px minmax(0,1fr)}.project-detail{position:static;grid-column:2;border-left:0;border-top:1px solid var(--line);padding:18px 0 0}.gallery-pages{grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}}
+@media(max-width:600px){.project-row{padding:38px 0}.project-gallery{margin-top:26px;gap:30px}.gallery-pages{grid-template-columns:1fr}.portfolio-image{max-height:none}}
