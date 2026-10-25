@@ -58,6 +58,9 @@ function projectCard(project, index) {
   if (project.chineseTitle) heading.append(element("span", "zh-title", project.chineseTitle));
   main.append(heading, element("p", "project-summary", project.summary));
 
+  const link = element("a", "project-open", "查看完整作品 ↗");
+  link.href = `project.html?id=${encodeURIComponent(project.id)}`;
+  main.append(link);
   const detail = element("div", "project-detail");
   detail.append(
     element("h3", "", "設計提問"),
@@ -67,7 +70,7 @@ function projectCard(project, index) {
   );
   if (project.role) detail.append(element("h3", "", "我的負責項目"), element("p", "", project.role));
   if (project.collaborators) detail.append(element("h3", "", "合作分工"), element("p", "", project.collaborators));
-  if (Array.isArray(project.sections)) {
+  if (Array.isArray(project.sections) && document.getElementById("detail-body")) {
     const gallery = element("div", "project-gallery");
     project.sections.forEach(section => {
       const block = element("section", "gallery-section");
@@ -114,3 +117,75 @@ async function renderWorks() {
 
 renderHome();
 renderWorks();
+
+
+function buildDetailSection(project) {
+  const container = document.getElementById("detail-body");
+  if (!container) return;
+  container.replaceChildren();
+  const info = element("div", "detail-info");
+  info.append(
+    element("div", "detail-fact", "設計提問"),
+    element("p", "", project.question || ""),
+    element("div", "detail-fact", "設計重點"),
+    element("p", "", project.focus || "")
+  );
+  if (project.role) info.append(element("div", "detail-fact", "我的負責項目"), element("p", "", project.role));
+  if (project.collaborators) info.append(element("div", "detail-fact", "合作分工"), element("p", "", project.collaborators));
+  container.append(info);
+  const gallery = element("div", "detail-gallery");
+  (project.sections || []).forEach((section, sectionIndex) => {
+    const block = element("section", "detail-section");
+    block.append(element("p", "eyebrow", String(sectionIndex + 1).padStart(2, "0") + " / DESIGN PROCESS"));
+    block.append(element("h2", "", section.title));
+    if (section.description) block.append(element("p", "detail-section-copy", section.description));
+    const images = element("div", "detail-images");
+    (section.pages || []).forEach(page => {
+      const figure = element("figure", "detail-figure");
+      const img = element("img", "detail-image");
+      img.src = `assets/portfolio/page-${String(page).padStart(2, "0")}.jpg`;
+      img.alt = `${project.title}：${section.title}，原作品集第 ${page} 頁`;
+      img.loading = "lazy";
+      img.addEventListener("error", () => {
+        figure.replaceChildren(element("p", "image-missing", `作品集第 ${page} 頁圖片尚未上傳`));
+      }, {once:true});
+      figure.append(img, element("figcaption", "", `原作品集 P.${page}`));
+      images.append(figure);
+    });
+    block.append(images);
+    gallery.append(block);
+  });
+  container.append(gallery);
+}
+
+async function renderProjectDetail() {
+  const title = document.getElementById("detail-title");
+  if (!title) return;
+  try {
+    const projects = await loadJSON("data/projects.json");
+    const id = new URLSearchParams(location.search).get("id");
+    const index = projects.findIndex(project => project.id === id);
+    if (index < 0) {
+      title.textContent = "找不到這個作品";
+      document.getElementById("detail-summary").textContent = "請返回作品選集，選擇要瀏覽的作品。";
+      return;
+    }
+    const project = projects[index];
+    title.textContent = project.title;
+    document.title = `${project.title} — 隋宜軒作品集`;
+    setText("detail-en", project.chineseTitle);
+    setText("detail-category", `${project.type} / ${project.status}`);
+    setText("detail-summary", project.summary);
+    buildDetailSection(project);
+    const next = projects[(index + 1) % projects.length];
+    const nav = document.getElementById("detail-next");
+    nav.append(element("p", "eyebrow", "下一個作品"));
+    const link = element("a", "detail-next-link", next.title + " ↗");
+    link.href = `project.html?id=${encodeURIComponent(next.id)}`;
+    nav.append(link);
+  } catch (error) {
+    title.textContent = "作品載入失敗";
+    console.error("Unable to load project:", error);
+  }
+}
+renderProjectDetail();
