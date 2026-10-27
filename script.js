@@ -70,7 +70,7 @@ function projectCard(project, index) {
       (section.pages || []).forEach(page => {
         const figure = element("figure", "portfolio-page");
         const img = element("img", "portfolio-image");
-        img.src = `assets/portfolio/page-${String(page).padStart(2, "0")}.jpg`;
+        img.src = `portfolio_project_images/assets/portfolio/page-${String(page).padStart(2, "0")}.jpg`;
         img.alt = `${project.title}－${section.title}，原作品集第 ${page} 頁`;
         img.loading = "lazy";
         img.addEventListener("error", () => {
@@ -132,7 +132,7 @@ function buildDetailSection(project) {
     (section.pages || []).forEach(page => {
       const figure = element("figure", "detail-figure");
       const img = element("img", "detail-image");
-      img.src = `assets/portfolio/page-${String(page).padStart(2, "0")}.jpg`;
+      img.src = `portfolio_project_images/assets/portfolio/page-${String(page).padStart(2, "0")}.jpg`;
       img.alt = `${project.title}：${section.title}，原作品集第 ${page} 頁`;
       img.loading = "lazy";
       img.addEventListener("error", () => {
