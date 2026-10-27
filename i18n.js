@@ -108,7 +108,7 @@ window.PortfolioI18n = (() => {
     ".principle-list article:nth-child(2) p": "Rethink the relationships between people, programs and shared spaces.",
     ".principle-list article:nth-child(3) h3": "Reimagine",
     ".principle-list article:nth-child(3) p": "Turn site research and spatial constraints into meaningful design questions.",
-    ".contact > .eyebrow": "03 / GET IN TOUCH",
+    ".contact > .eyebrow": "02 / GET IN TOUCH",
     ".contact h2": "Good design<br>begins with <em>dialogue.</em>",
     ".contact .muted": "Open to conversations about architecture, design and spatial experiences.",
     ".contact-phone": "Phone: <a href='tel:0900000000' id='contact-phone'>0900-000-000</a>"
