@@ -1,7 +1,10 @@
 async function loadJSON(path) {
   const response = await fetch(`${path}?v=20261026-portfolio`, { cache: "no-cache" });
   if (!response.ok) throw new Error(`Could not load ${path}`);
-  return response.json();
+  const data = await response.json();
+  if (path === "data/profile.json") return window.PortfolioI18n.translateProfile(data);
+  if (path === "data/projects.json") return window.PortfolioI18n.translateProjects(data);
+  return data;
 }
 
 function setText(id, value) {
@@ -58,7 +61,7 @@ function projectCard(project, index) {
   if (project.chineseTitle) heading.append(element("span", "zh-title", project.chineseTitle));
   main.append(heading, element("p", "project-summary", project.summary));
 
-  const link = element("a", "project-open", "查看完整作品 ↗");
+  const link = element("a", "project-open", window.PortfolioI18n.labels.open);
   link.href = `project.html?id=${encodeURIComponent(project.id)}`;
   main.append(link);
   if (Array.isArray(project.sections) && document.getElementById("detail-body")) {
@@ -74,9 +77,9 @@ function projectCard(project, index) {
         img.alt = `${project.title}－${section.title}，原作品集第 ${page} 頁`;
         img.loading = "lazy";
         img.addEventListener("error", () => {
-          figure.replaceChildren(element("p", "image-missing", `原作品集第 ${page} 頁圖面，待上傳圖片`));
+          figure.replaceChildren(element("p", "image-missing", window.PortfolioI18n.isEnglish ? `Image not available: portfolio page ${page}` : `原作品集第 ${page} 頁圖面，待上傳圖片`));
         }, {once:true});
-        figure.append(img, element("figcaption", "", `作品集 P.${page}`));
+        figure.append(img, element("figcaption", "", `${window.PortfolioI18n.labels.page}${page}`));
         pages.append(figure);
       });
       block.append(pages);
@@ -101,7 +104,7 @@ async function renderWorks() {
     }
   } catch (error) {
     container.replaceChildren(element("p", "loading-note",
-      "作品資料載入失敗，請檢查 data/projects.json 並重新整理頁面。"));
+      window.PortfolioI18n.labels.loadingError));
     console.error("Unable to load projects:", error);
   }
 }
@@ -116,9 +119,9 @@ function buildDetailSection(project) {
   container.replaceChildren();
   const info = element("div", "detail-info");
   info.append(
-    element("div", "detail-fact", "設計提問"),
+    element("div", "detail-fact", window.PortfolioI18n.labels.question),
     element("p", "", project.question || ""),
-    element("div", "detail-fact", "設計重點"),
+    element("div", "detail-fact", window.PortfolioI18n.labels.focus),
     element("p", "", project.focus || "")
   );
   container.append(info);
@@ -136,9 +139,9 @@ function buildDetailSection(project) {
       img.alt = `${project.title}：${section.title}，原作品集第 ${page} 頁`;
       img.loading = "lazy";
       img.addEventListener("error", () => {
-        figure.replaceChildren(element("p", "image-missing", `作品集第 ${page} 頁圖片尚未上傳`));
+        figure.replaceChildren(element("p", "image-missing", window.PortfolioI18n.isEnglish ? `Image not available: portfolio page ${page}` : `作品集第 ${page} 頁圖片尚未上傳`));
       }, {once:true});
-      figure.append(img, element("figcaption", "", `原作品集 P.${page}`));
+      figure.append(img, element("figcaption", "", `${window.PortfolioI18n.labels.page}${page}`));
       images.append(figure);
     });
     block.append(images);
@@ -155,25 +158,26 @@ async function renderProjectDetail() {
     const id = new URLSearchParams(location.search).get("id");
     const index = projects.findIndex(project => project.id === id);
     if (index < 0) {
-      title.textContent = "找不到這個作品";
-      document.getElementById("detail-summary").textContent = "請返回作品選集，選擇要瀏覽的作品。";
+      title.textContent = window.PortfolioI18n.isEnglish ? "Project not found" : "找不到這個作品";
+      document.getElementById("detail-summary").textContent = window.PortfolioI18n.isEnglish ? "Return to selected works to choose a project." : "請返回作品選集，選擇要瀏覽的作品。";
       return;
     }
     const project = projects[index];
     title.textContent = project.title;
-    document.title = `${project.title} — 隋宜軒作品集`;
+    document.title = `${project.title} — ${window.PortfolioI18n.isEnglish ? "Yi-Hsuan Sui Portfolio" : "隋宜軒作品集"}`;
     setText("detail-en", project.chineseTitle);
     setText("detail-category", `${project.type} / ${project.status}`);
     setText("detail-summary", project.summary);
     buildDetailSection(project);
     const next = projects[(index + 1) % projects.length];
     const nav = document.getElementById("detail-next");
-    nav.append(element("p", "eyebrow", "下一個作品"));
+    nav.replaceChildren();
+    nav.append(element("p", "eyebrow", window.PortfolioI18n.labels.next));
     const link = element("a", "detail-next-link", next.title + " ↗");
     link.href = `project.html?id=${encodeURIComponent(next.id)}`;
     nav.append(link);
   } catch (error) {
-    title.textContent = "作品載入失敗";
+    title.textContent = window.PortfolioI18n.isEnglish ? "Unable to load project" : "作品載入失敗";
     console.error("Unable to load project:", error);
   }
 }
