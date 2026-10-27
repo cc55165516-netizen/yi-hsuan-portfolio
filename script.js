@@ -121,8 +121,6 @@ function buildDetailSection(project) {
     element("div", "detail-fact", "設計重點"),
     element("p", "", project.focus || "")
   );
-  if (project.role) info.append(element("div", "detail-fact", "我的負責項目"), element("p", "", project.role));
-  if (project.collaborators) info.append(element("div", "detail-fact", "合作分工"), element("p", "", project.collaborators));
   container.append(info);
   const gallery = element("div", "detail-gallery");
   (project.sections || []).forEach((section, sectionIndex) => {
