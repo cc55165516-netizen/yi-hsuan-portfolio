@@ -61,15 +61,6 @@ function projectCard(project, index) {
   const link = element("a", "project-open", "查看完整作品 ↗");
   link.href = `project.html?id=${encodeURIComponent(project.id)}`;
   main.append(link);
-  const detail = element("div", "project-detail");
-  detail.append(
-    element("h3", "", "設計提問"),
-    element("p", "", project.question),
-    element("h3", "", "設計重點"),
-    element("p", "", project.focus)
-  );
-  if (project.role) detail.append(element("h3", "", "我的負責項目"), element("p", "", project.role));
-  if (project.collaborators) detail.append(element("h3", "", "合作分工"), element("p", "", project.collaborators));
   if (Array.isArray(project.sections) && document.getElementById("detail-body")) {
     const gallery = element("div", "project-gallery");
     project.sections.forEach(section => {
@@ -93,7 +84,7 @@ function projectCard(project, index) {
     });
     main.append(gallery);
   }
-  article.append(main, detail);
+  article.append(main);
   return article;
 }
 
